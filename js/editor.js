@@ -28,12 +28,22 @@ function addMoushLisener() {
 
 function onDown(ev) {
   const pos = getEvPos(ev)
-  console.log('sdfg', pos)
-  console.log('canvas size:', gElCanvas.width, gElCanvas.height)
-  console.log('canvas CSS size:', gElCanvas.clientWidth, gElCanvas.clientHeight)
+  const clickedIdx = checkClick(pos.x, pos.y)
+  if (!clickedIdx) {
+    gMeme.selectedLineIdx = clickedIdx
+    drawMeme()
+  }
   addText(pos.x, pos.y)
 }
 
+function checkClick(x, y) {
+  for (let i = 0; i < gMeme.lines.length; i++) {
+    const line = gMeme.lines[i]
+
+    const textWidth = gCtx.measureText(line.text)
+    if (x > line.x) return true
+  }
+}
 function getEvPos(ev) {
   const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
 
@@ -132,7 +142,15 @@ function setAlingLeft() {
 function setAlingRight() {
   return
 }
+function changeText(e) {
+  if (!e) return
+  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+  currentLine.txt = e.value
+  console.log(currentLine, 'asdg', e.value)
+}
 function changeColorText(e) {
+  if (!e) return
+
   const currentLine = gMeme.lines[gMeme.selectedLineIdx]
 
   currentLine.color = e
