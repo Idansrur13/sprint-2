@@ -3,7 +3,7 @@ const gImgs = getImgs()
 const gMeme = {
   selectedImgId: 0,
   selectedLineIdx: 0,
-  lines: [{ txt: 'asdg', size: 30, color: '#000f4' }],
+  lines: [],
 }
 function onImgSelect(imgId) {
   gMeme.selectedImgId = imgId

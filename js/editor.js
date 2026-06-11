@@ -61,16 +61,16 @@ function onMove(ev) {
 }
 
 function addText(x, y) {
-  const inputText = document.querySelector('input')
-  const line = gMeme.lines[gMeme.selectedLineIdx]
+  // const inputText = document.querySelector('input')
+  // const line = gMeme.lines[gMeme.selectedLineIdx]
   //   const line = { txt: 'asdg', size: 20, color: '#000f4' }
-  gCtx.font = `${line.size || 30}px Arial`
-  gCtx.fillStyle = line.color || 'black'
-  gCtx.fillText(line.txt, x, y)
+  // gCtx.font = `${line.size || 30}px Arial`
+  // gCtx.fillStyle = line.color || 'black'
 
-  inputText.value = line.txt
-  inputText.addEventListener('input', onTextChange)
+  // inputText.value = line.txt
+  // inputText.addEventListener('input', onTextChange)
   //   gMeme.lines.push(line)
+  setPlusLine(x, y)
 }
 
 function onTextChange(ev) {
@@ -101,10 +101,18 @@ function getCanvas(imgObj) {
 
 // ______________ controlersssss_______
 
-function setPlusLine() {
+function setPlusLine(x, y) {
+  const newLine = { txt: 'הקלד כאן..', size: 30, color: '#000f4' }
+  gMeme.lines.push(newLine)
+  gCtx.font = `${newLine.size || 30}px Arial`
+  gCtx.fillStyle = newLine.color || 'black'
+  gCtx.fillText(newLine.txt, x, y)
+
   return
 }
 function setMinusLine() {
+  gMeme.lines.splice(gMeme.selectedLineIdx, 1)
+
   return
 }
 function setAlingSpreed() {
