@@ -7,32 +7,6 @@ function renderMeme() {
 
   const imgObj = gImgs.find((i) => i.id === gMeme.selectedImgId)
 
-  const ff = `<div class="editor-div">
-  <div class="action-editor">
-  <p>
-
-                  <canvas class="main-canvas"></canvas>
-
-   <div>
-   <input value="ggg" />
-   <div class="editor-settings">
-
-
-   <button class="button-img"><i class="fa-solid fa-plus"></i></button>
-   <button class="button-img"><i class="fa-solid fa-minus"></i></button>
-   <button class="button-img"><i class="fa-solid fa-text-height"></i></button>
-   <button class="button-img"><i class="fa-solid fa-align-center"></i></button>
-   <button class="button-img"><i class="fa-solid fa-align-justify"></i></button>
-   <button class="button-img"><i class="fa-solid fa-align-left"></i></button>
-   <button class="button-img"><i class="fa-solid fa-align-right"></i></button>
-   <button class="button-img" onclick="changeColor()"><i class="fa-solid fa-fill-drip" ></i></button>
-    <a href="${imgObj.url}" download><button class="button-img"><i class="fa-solid fa-download"></i></button></a>
-    </div>
-   </div>
-   </div>
-</div>`
-
-  editorDiv.innerHTML = ff
   getCanvas(imgObj)
   addLissener()
 }
@@ -111,6 +85,8 @@ function onUp() {
 
 function getCanvas(imgObj) {
   gElCanvas = document.querySelector('.main-canvas')
+  console.log('asdg', gElCanvas)
+
   gElCanvas.width = 400
   gElCanvas.height = 400
   gCtx = gElCanvas.getContext('2d')
@@ -121,4 +97,38 @@ function getCanvas(imgObj) {
   img.onload = () => {
     gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
   }
+}
+
+// ______________ controlersssss_______
+
+function setPlusLine() {
+  return
+}
+function setMinusLine() {
+  return
+}
+function setAlingSpreed() {
+  return
+}
+function setAlingCenter() {
+  return
+}
+function setTextHight() {
+  return
+}
+function setAlingLeft() {
+  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+  console.log(currentLine)
+  return
+}
+function setAlingRight() {
+  return
+}
+function changeColorText(e) {
+  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+
+  currentLine.color = e
+
+  drawMeme()
+  return
 }

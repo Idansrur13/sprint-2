@@ -26,7 +26,38 @@
         <section>
             <h2> זה הזמן ליצור את המים הבא</h2>
             <div class="editor">
+                <div class="editor-div">
+                    <div class="action-editor">
+                        <p>
 
+                            <canvas class="main-canvas"></canvas>
+
+                        <div>
+                            <input value="ggg" />
+                            <div class="editor-settings">
+
+                                <button class="button-img"><i class="fa-solid fa-plus"
+                                        onclick="setPlusLine()"></i></button>
+                                <button class="button-img"><i class="fa-solid fa-minus"
+                                        onclick="setMinusLine()"></i></button>
+                                <button class="button-img"><i class="fa-solid fa-text-height"
+                                        onclick="setTextHight()"></i></button>
+                                <button class=" button-img"><i class="fa-solid fa-align-center"
+                                        onclick=" setAlingCenter()"></i></button>
+                                <button class="button-img"><i class="fa-solid fa-align-justify"
+                                        onclick="setAlingSpreed()"></i></button>
+                                <button class="button-img"><i class="fa-solid fa-align-left"
+                                        onclick="setAlingLeft()"></i></button>
+                                <button class=" button-img"><i class="fa-solid fa-align-right"
+                                        onclick="setAlingRight()"></i></button>
+
+                                <input type='color' onchange="changeColorText(this.value)" />
+                                <a href="${imgObj.url}" download><button class="button-img"><i
+                                            class="fa-solid fa-download"></i></button></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="galery">
 
