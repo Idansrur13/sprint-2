@@ -17,6 +17,24 @@ function renderMeme() {
   addLissener()
 }
 
+function setSevedImgs() {
+  const editorDiv = document.querySelector('.editor')
+  const galeryDiv = document.querySelector('.galery')
+  const backButton = document.querySelector('.back-button')
+  setFilter('saved')
+
+  editorDiv.style.display = 'none'
+  backButton.style.display = 'none'
+  galeryDiv.style.display = 'flex'
+
+  gMeme = {
+    selectedImgId: 0,
+    selectedLineIdx: 0,
+    lines: [],
+    svgs: [],
+  }
+}
+
 function closeEditor() {
   const editorDiv = document.querySelector('.editor')
   const galeryDiv = document.querySelector('.galery')
@@ -117,9 +135,16 @@ function onMove(ev) {
   const pos = getEvPos(ev)
   // addText(pos.x, pos.y)
   // gStartPos = pos
-  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  currentLine.x = pos.x
-  currentLine.y = pos.y
+  if (gMeme.selectedType === 'lines') {
+    const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+    currentLine.x = pos.x
+    currentLine.y = pos.y
+  } else {
+    const currentLine = gMeme.svgs[gMeme.selectedLineIdx]
+    currentLine.x = pos.x
+    currentLine.y = pos.y
+  }
+
   drawMeme()
 }
 
@@ -193,25 +218,43 @@ function setTextBold() {
   textWidth.return
 }
 function setGoTextRight() {
-  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  currentLine.x += 20
+  if (gMeme.selectedType === 'lines') {
+    const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+    currentLine.x += 20
+  } else {
+    const currentLine = gMeme.svgs[gMeme.selectedLineIdx]
+    currentLine.x += 20
+  }
+
   drawMeme()
   return
 }
 function setGoTextLeft() {
-  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  currentLine.x -= 20
+  if (gMeme.selectedType === 'lines') {
+    const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+    currentLine.x -= 20
+  } else {
+    const currentLine = gMeme.svgs[gMeme.selectedLineIdx]
+    currentLine.x -= 20
+  }
   drawMeme()
   return
 }
 function setGoTextDown() {
-  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  currentLine.y += 20
+  if (gMeme.selectedType === 'lines') {
+    const currentLine = gMeme.lines[gMeme.selectedLineIdx]
+    currentLine.y += 20
+  } else {
+    const currentLine = gMeme.svgs[gMeme.selectedLineIdx]
+    currentLine.y += 20
+  }
   drawMeme()
   return
 }
 
 function setNextLine() {
+  if (gMeme.selectedType === 'svgs') return
+
   if (gMeme.selectedLineIdx === gMeme.lines.length - 1) {
     gMeme.selectedLineIdx = 0
   } else {
@@ -224,6 +267,7 @@ function setNextLine() {
   return
 }
 function setPrevLine() {
+  if (gMeme.selectedType === 'svgs') return
   if (gMeme.selectedLineIdx === 0) {
     gMeme.selectedLineIdx = gMeme.lines.length - 1
   } else {
@@ -235,13 +279,13 @@ function setPrevLine() {
   return
 }
 function changeText(e) {
-  if (!e) return
+  if (!e || gMeme.selectedType === 'svgs') return
 
   gMeme.lines[gMeme.selectedLineIdx].txt = e
   drawMeme()
 }
 function changeColorText(e) {
-  if (!e) return
+  if (!e || gMeme.selectedType === 'svgs') return
 
   const currentLine = gMeme.lines[gMeme.selectedLineIdx]
 
@@ -252,7 +296,12 @@ function changeColorText(e) {
 }
 
 function changeSizeText(val) {
-  gMeme.lines[gMeme.selectedLineIdx].size = val
+  console.log(val)
+  if (gMeme.selectedType === 'lines') {
+    gMeme.lines[gMeme.selectedLineIdx].size = val
+  } else {
+    gMeme.svgs[gMeme.selectedLineIdx].size = val + `0`
+  }
   drawMeme()
 
   return
@@ -293,6 +342,7 @@ function drawMeme() {
       const textWidth = gCtx.measureText(selectedLine.txt).width
       gCtx.strokeStyle = '#84cb7da4'
       gCtx.lineWidth = 1
+
       gCtx.strokeRect(
         selectedLine.x - textWidth,
         selectedLine.y - selectedLine.size,
