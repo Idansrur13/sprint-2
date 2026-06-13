@@ -16,61 +16,100 @@
         <h1>ברוכים הבאים</h1>
         <nav>
 
-            <a href="#">גלריה</a>
+            <a href="#" onclick="closeEditor()">גלריה</a>
 
-            <a href="#">שמורים</a>
-            <a href="#">צור מימ</a>
+            <a href="#" onclick="setFilter('saved')">שמורים</a>
+
         </nav>
+
+        <div>
+
+            <div class="common-serch">
+                <i class="fa-solid fa-search"></i>
+            </div>
+            <input type="text" onchange="setFilter(this.value)">
+        </div>
+
     </header>
+
 
     <main>
         <section>
             <div class="header-editor">
                 <h2> זה הזמן ליצור את המים הבא</h2>
-                <button><i class="fa-solid fa-angle-left"></i>
+                <button class="back-button" onclick="closeEditor()"><i class="fa-solid fa-angle-left"></i>
                 </button>
             </div>
 
             <div class="editor">
                 <div class="editor-div">
+                    <canvas class="main-canvas"></canvas>
                     <div class="action-editor">
-                        <p>
 
-                            <canvas class="main-canvas"></canvas>
 
-                        <div>
+                        <div class="cover-svg">
+                            <div class="select-svg">
+
+                            </div>
+
+                        </div>
+
+                        <div class="editor-settings">
+
                             <input class="inputText" value="הקלד כאן" oninput="changeText(this.value)" />
-                            <div class="editor-settings">
 
-                                <button class="button-img"><i class="fa-solid fa-plus"
-                                        onclick="setPlusLine()"></i></button>
-                                <button class="button-img"><i class="fa-solid fa-minus"
-                                        onclick="setMinusLine()"></i></button>
-                                <button class="button-img"><i class="fa-solid fa-text-height"
-                                        onclick="setTextHight()"></i></button>
-                                <button class=" button-img"><i class="fa-solid fa-align-center"
-                                        onclick=" setAlingCenter()"></i></button>
-                                <button class="button-img"><i class="fa-solid fa-align-justify"
-                                        onclick="setAlingSpreed()"></i></button>
-                                <button class="button-img"><i class="fa-solid fa-align-left"
-                                        onclick="setAlingLeft()"></i></button>
-                                <button class=" button-img"><i class="fa-solid fa-align-right"
-                                        onclick="setAlingRight()"></i></button>
+                            <button class="button-img" onclick="setPlusLine()"><i class="fa-solid fa-plus"></i></button>
 
-                                <input type='color' onchange="changeColorText(this.value)" />
-                                <a href="${imgObj.url}" download><button class="button-img"><i
-                                            class="fa-solid fa-download"></i></button></a>
+                            <button class="button-img" onclick="setMinusLine()"><i
+                                    class="fa-solid fa-delete-left"></i></button>
+
+
+                            <button class="button-img" onclick="setPrevLine()"> <i
+                                    class="fa-solid fa-forward"></i></button>
+                            <button class=" button-img" onclick="setNextLine()"><i class="fa-solid fa-backward"></i>
+                            </button>
+
+                            <input type='color' onchange="changeColorText(this.value)" />
+
+                            <button class=" button-img" onclick="downloadMeme()"><i class="fa-solid fa-download"></i>
+                            </button>
+                            <button class="button-img" onclick="saveMemeToDb()"><i
+                                    class="fa-solid fa-save"></i></button>
+
+                            <div class="Input-range">
+                                <p>5</p>
+                                <input type="range" max="60" min="4" value="30" onchange="changeSizeText(this.value)">
+                                <p>60</p>
+                            </div>
+
+                            <div class="controller-text">
+                                <button class="button-img" onclick="setGoTextUp()"><i
+                                        class="fa-solid fa-angle-up"></i></button>
+                                <div>
+                                    <button class="button-img" onclick="setGoTextRight()"><i
+                                            class="fa-solid fa-angle-right"></i></button>
+                                    <button class="button-img" onclick="setTextBold()"><i
+                                            class="fa-solid fa-bold"></i></button>
+                                    <button class="button-img" onclick="setGoTextLeft()"><i
+                                            class="fa-solid fa-angle-left"></i></button>
+                                </div>
+
+                                <button class="button-img" onclick="setGoTextDown()"><i
+                                        class="fa-solid fa-angle-down"></i></button>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-            <div class="galery">
+            <div class="galery"></div>
 
+            <div class="saved-section" style="display:none">
+                <h2>ממים שמורים</h2>
+                <div class="saved-grid"></div>
             </div>
 
-
-            <div class="backdrop-modal">
+            <div class="backdrop-modal" onclick="closeModal()">
                 <div class="modal">
                     <img src="" alt="" class="imgShow">
                 </div>

@@ -1,18 +1,23 @@
 header {
-    flex-direction: column;
+    flex-direction: row;
     display: flex;
     background-color: #e6ffe3;
+    border-radius: 20px;
+    box-shadow: 1px 2px 3px #676966;
     align-items: center;
-    gap: 16px;
-    justify-content: center;
+    gap: 6px;
+    padding-bottom: 8px;
+    justify-content: space-evenly;
     width: 100%;
 
 }
 
 nav {
-    border: 1px solid #d2caca;
-    align-self: center;
 
+    align-self: center;
+    display: flex;
+    gap: 22px;
+    font-size: x-large;
 }
 
 .galery {
@@ -34,10 +39,9 @@ nav {
     width: 200px;
     object-fit: cover;
 
-
-
-
 }
+
+
 
 .galery-img {
     border-radius: 20px;
@@ -55,10 +59,17 @@ nav {
 
 }
 
-.galery img:hover {
+.galery-img:hover>.action-img {
+    transition: all 600ms;
+    display: flex;
+    opacity: 1;
 
-    translate: 0 -20px;
-    transform: scale(1.2);
+}
+
+.imgSVG:hover {
+
+    translate: 0 -2px;
+
     box-shadow: 2px 2px 6px;
     transition: all 300ms;
 }
@@ -79,6 +90,10 @@ nav {
     width: 100%;
     border-radius: 40px;
     display: flex;
+    flex-wrap: wrap;
+
+    gap: 22px;
+
     /* grid-template-columns: repeat(2, 1fr); */
 }
 
@@ -94,6 +109,7 @@ nav {
 
 .header-editor {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding-left: 22px;
@@ -103,7 +119,9 @@ nav {
     display: flex;
     flex: 1;
     flex-direction: row;
-    justify-content: center;
+    flex-wrap: wrap;
+
+    justify-content: space-evenly;
     align-items: center;
 
     gap: 4px;
@@ -112,16 +130,45 @@ nav {
 }
 
 button {
+
     background-color: #5bcf4e;
     border: 1px solid #22611c;
     border-radius: 6px;
     padding: 4px
 }
 
+.cover-svg {
+    border: 1px solid #5bcf4e;
+    width: 300px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+}
+
+.select-svg {
+
+    gap: 8px;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    display: flex;
+}
+
+.back-button {
+    display: none;
+    padding-inline: 12px;
+}
+
 .editor-settings {
     display: flex;
-    gap: 4px;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 8px;
+    max-width: 160px;
+    justify-content: space-between;
+}
+
+.Input-range {
+    display: flex;
+
 }
 
 .backdrop-modal {
@@ -151,12 +198,44 @@ button {
     height: 400px;
 }
 
+.controller-text {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #22611c;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    border-radius: 50%;
+}
+
+.imgSVG {
+    height: 100%;
+    width: 100px;
+    object-fit: cover;
+
+
+}
+
+.common-serch {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 160px;
+    gap: 12px;
+    padding: 8px;
+    /* border: 1px solid #5bcf4e; */
+}
+
+.comSerch {
+    font-size: x-large;
+    color: #2c7324;
+}
 
 /* ---------------------------------------- */
 
-/* .main-canvas {
-    height: 300px;
-    width: 300px;
+.main-canvas {
+    height: fit-content;
+    width: fit-content;
     background: #bb6a6a8a;
 
-} */
+}
