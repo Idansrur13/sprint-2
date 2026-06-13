@@ -17,6 +17,7 @@
         <nav>
 
             <a href="#">גלריה</a>
+
             <a href="#">שמורים</a>
             <a href="#">צור מימ</a>
         </nav>
@@ -24,7 +25,12 @@
 
     <main>
         <section>
-            <h2> זה הזמן ליצור את המים הבא</h2>
+            <div class="header-editor">
+                <h2> זה הזמן ליצור את המים הבא</h2>
+                <button><i class="fa-solid fa-angle-left"></i>
+                </button>
+            </div>
+
             <div class="editor">
                 <div class="editor-div">
                     <div class="action-editor">
@@ -33,7 +39,7 @@
                             <canvas class="main-canvas"></canvas>
 
                         <div>
-                            <input class="inputText" value="הקלד כאן" onchange="changeText(this.value)" />
+                            <input class="inputText" value="הקלד כאן" oninput="changeText(this.value)" />
                             <div class="editor-settings">
 
                                 <button class="button-img"><i class="fa-solid fa-plus"
@@ -64,7 +70,11 @@
             </div>
 
 
-
+            <div class="backdrop-modal">
+                <div class="modal">
+                    <img src="" alt="" class="imgShow">
+                </div>
+            </div>
         </section>
     </main>
 

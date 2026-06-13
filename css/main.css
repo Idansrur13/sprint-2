@@ -92,6 +92,13 @@ nav {
     display: none;
 }
 
+.header-editor {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 22px;
+}
+
 .action-editor {
     display: flex;
     flex: 1;
@@ -115,6 +122,33 @@ button {
     display: flex;
     gap: 4px;
     justify-content: space-around;
+}
+
+.backdrop-modal {
+    position: fixed;
+    display: flex;
+    z-index: -20;
+    opacity: 0;
+    inset: 0;
+    height: '100%';
+    width: '100%';
+    background-color: #00000061;
+    justify-content: center;
+    align-items: center;
+    place-items: center;
+    border: 1px solid #22611c;
+}
+
+.modal {
+    background-color: #eeffec;
+    min-height: 80px;
+    min-width: 80px;
+    z-index: 2;
+}
+
+.imgShow {
+    width: 400px;
+    height: 400px;
 }
 
 

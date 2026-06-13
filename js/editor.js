@@ -3,7 +3,10 @@ var gCtx
 var gIsMouseDown
 function renderMeme() {
   const editorDiv = document.querySelector('.editor')
+  const galeryDiv = document.querySelector('.galery')
+
   editorDiv.style.display = 'flex'
+  galeryDiv.style.display = 'none'
 
   const imgObj = gImgs.find((i) => i.id === gMeme.selectedImgId)
 
@@ -29,9 +32,10 @@ function addMoushLisener() {
 function onDown(ev) {
   const pos = getEvPos(ev)
   const clickedIdx = checkClick(pos.x, pos.y)
-  if (!clickedIdx) {
+  console.log('hihi', clickedIdx)
+  if (clickedIdx) {
     gMeme.selectedLineIdx = clickedIdx
-    drawMeme()
+    return
   }
   addText(pos.x, pos.y)
 }
@@ -40,9 +44,18 @@ function checkClick(x, y) {
   for (let i = 0; i < gMeme.lines.length; i++) {
     const line = gMeme.lines[i]
 
-    const textWidth = gCtx.measureText(line.text)
-    if (x > line.x) return true
+    const textWidth = gCtx.measureText(line.txt).width
+
+    if (
+      x > line.x - textWidth / 2 &&
+      x < line.x + textWidth / 2 &&
+      y > line.y - line.size &&
+      y < line.y
+    ) {
+      return i
+    }
   }
+  return false
 }
 function getEvPos(ev) {
   const TOUCH_EVS = ['touchstart', 'touchmove', 'touchend']
@@ -83,19 +96,12 @@ function addText(x, y) {
   setPlusLine(x, y)
 }
 
-function onTextChange(ev) {
-  console.log('sdg', gMeme.lines)
-  gMeme.lines[gMeme.selectedLineIdx].txt = ev.target.value
-  //   renderMeme()
-}
-
 function onUp() {
   gIsMouseDown = false
 }
 
 function getCanvas(imgObj) {
   gElCanvas = document.querySelector('.main-canvas')
-  console.log('asdg', gElCanvas)
 
   gElCanvas.width = 400
   gElCanvas.height = 400
@@ -112,8 +118,9 @@ function getCanvas(imgObj) {
 // ______________ controlersssss_______
 
 function setPlusLine(x, y) {
-  const newLine = { txt: 'הקלד כאן..', size: 30, color: '#000f4' }
+  const newLine = { txt: 'הקלד כאן..', size: 30, color: '#000f4', x, y }
   gMeme.lines.push(newLine)
+  gMeme.selectedLineIdx = gMeme.lines.length - 1
   gCtx.font = `${newLine.size || 30}px Arial`
   gCtx.fillStyle = newLine.color || 'black'
   gCtx.fillText(newLine.txt, x, y)
@@ -136,7 +143,7 @@ function setTextHight() {
 }
 function setAlingLeft() {
   const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  console.log(currentLine)
+
   return
 }
 function setAlingRight() {
@@ -144,9 +151,9 @@ function setAlingRight() {
 }
 function changeText(e) {
   if (!e) return
-  const currentLine = gMeme.lines[gMeme.selectedLineIdx]
-  currentLine.txt = e.value
-  console.log(currentLine, 'asdg', e.value)
+
+  gMeme.lines[gMeme.selectedLineIdx].txt = e
+  drawMeme()
 }
 function changeColorText(e) {
   if (!e) return
@@ -154,7 +161,25 @@ function changeColorText(e) {
   const currentLine = gMeme.lines[gMeme.selectedLineIdx]
 
   currentLine.color = e
-
   drawMeme()
+
   return
+}
+
+function drawMeme() {
+  const imgObj = gImgs.find((i) => i.id === gMeme.selectedImgId)
+  const img = new Image()
+  img.src = imgObj.url
+
+  img.onload = () => {
+    gCtx.clearRect(0, 0, gElCanvas.width, gElCanvas.height)
+    gCtx.drawImage(img, 0, 0, gElCanvas.width, gElCanvas.height)
+
+    gMeme.lines.forEach((line) => {
+      gCtx.font = `${line.size}px Arial`
+      gCtx.fillStyle = line.color
+      gCtx.fillText(line.txt, line.x, line.y)
+    })
+  }
+  console.log('asdg', gMeme)
 }

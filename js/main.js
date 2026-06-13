@@ -18,6 +18,17 @@ function oninit() {
   initGalery()
 }
 
+function viewImg(img) {
+  gMeme.selectedImgId = img
+  openModalImg()
+  console.log(img)
+}
+
+function openModalImg() {
+  const modal = document.querySelector('.backdrop-modal')
+  modal.style.opacity = 1
+  modal.style.zIndex = 1
+}
 function initGalery() {
   const galeryDiv = document.querySelector('.galery')
   let htmlInner = ''
@@ -27,7 +38,7 @@ function initGalery() {
    <div class="action-img">
 
    <button class="button-img" onclick="onImgSelect(${img.id})"><i class="fa-solid fa-pencil"></i></button>
-   <button class="button-img"><i class="fa-solid fa-eye"></i></button>
+   <button class="button-img"><i class="fa-solid fa-eye" onclick="viewImg(${img.id})"></i></button>
     <a href="${img.url}" download><button class="button-img"><i class="fa-solid fa-download"></i></button></a>
    </div>
 </div>`
